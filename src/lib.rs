@@ -5,6 +5,8 @@ trait OnceCellExt<T> {
     fn set_or_else<E, F>(&mut self, value: T, error: F) -> Result<(), E>
     where
         F: FnOnce() -> E;
+    fn is_some(&self) -> bool;
+    fn is_none(&self) -> bool;
 }
 
 macro_rules! once_cell_ext_impl {
@@ -19,6 +21,14 @@ macro_rules! once_cell_ext_impl {
                 F: FnOnce() -> E,
             {
                 self.set(value).map_err(|_| error())
+            }
+
+            fn is_some(&self) -> bool {
+                self.get().is_some()
+            }
+
+            fn is_none(&self) -> bool {
+                self.get().is_none()
             }
         })*
     };
