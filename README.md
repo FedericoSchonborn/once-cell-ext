@@ -1,3 +1,3 @@
-# Onception
+# `once_cell_ext`
 
-An `Option` that can only be set to `Some` once.
+Extension trait for `OnceCell`.

@@ -1,10 +1,13 @@
 [package]
-name = "onception"
+name = "once_cell_ext"
 version = "0.0.0"
-description = "An Option that can only be set to Some once"
+description = "Extension trait for OnceCell"
 license = "BSD-3-Clause"
-repository = "https://github.com/fdschonborn/onception"
+repository = "https://github.com/fdschonborn/once-cell-ext"
 readme = "README.md"
 categories = ["data-structures", "rust-patterns"]
 keywords = ["option", "once", "once-option"]
 edition = "2021"
+
+[dependencies]
+once_cell = "1.9.0"
