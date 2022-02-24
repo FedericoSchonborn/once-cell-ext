@@ -1,8 +1,9 @@
 [package]
 name = "onception"
-version = "0.1.0"
+version = "0.0.0"
+description = "An Option that can only be set to Some once"
+license = "BSD-3-Clause"
+repository = "https://github.com/fdschonborn/onception"
+categories = ["data-structures", "rust-patterns"]
+keywords = ["option", "once", "once-option"]
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
