@@ -36,9 +36,9 @@ macro_rules! once_cell_ext_impl {
 
 #[cfg(feature = "std")]
 once_cell_ext_impl! {
-    std::lazy::OnceCell<T>
+    std::lazy::OnceCell<T>, std::lazy::SyncOnceCell<T>
 }
 
 once_cell_ext_impl! {
-    once_cell::sync::OnceCell<T>, once_cell::unsync::OnceCell<T>
+    once_cell::unsync::OnceCell<T>, once_cell::sync::OnceCell<T>
 }
