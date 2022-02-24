@@ -70,6 +70,10 @@ impl<T> OnceOption<T> {
         self.0
     }
 
+    pub fn take(&mut self) -> Option<T> {
+        self.0.take()
+    }
+
     pub const fn as_ref(&self) -> Option<&T> {
         self.0.as_ref()
     }
