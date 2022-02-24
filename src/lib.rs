@@ -9,16 +9,35 @@ use std::{
 pub struct OnceOption<T>(Option<T>);
 
 impl<T> OnceOption<T> {
+    /// Create a new [`OnceOption`] containing [`None`].
+    pub const fn new() -> Self {
+        Self(None)
+    }
+
+    /// Insert `Some(value)` into the option.
+    ///
     /// # Errors
     ///
-    /// This function fails if `self` is already occupied.
+    /// This function fails if `self` is already in use.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// # fn main() {
+    /// use onception::{OnceOption, SomeError};
+    ///
+    /// let mut n = OnceOption::new();
+    /// assert_eq!(n.set(42), Ok(()));
+    /// assert_eq!(n.set(64), Err(SomeError));
+    /// # }
+    /// ```
     pub fn set(&mut self, value: T) -> Result<(), SomeError> {
         self.set_or(value, SomeError)
     }
 
     /// # Errors
     ///
-    /// This function returns `error` if `self` is already occupied.
+    /// This function returns `error` if `self` is already in use.
     pub fn set_or<E>(&mut self, value: T, error: E) -> Result<(), E>
     where
         E: Error,
@@ -33,7 +52,7 @@ impl<T> OnceOption<T> {
 
     /// # Errors
     ///
-    /// This function returns `error()` if `self` is already occupied.
+    /// This function returns `error()` if `self` is already in use.
     pub fn set_or_else<E, F>(&mut self, value: T, error: F) -> Result<(), E>
     where
         E: Error,
@@ -65,6 +84,18 @@ impl<T> OnceOption<T> {
 
     pub const fn is_none(&self) -> bool {
         self.0.is_none()
+    }
+}
+
+impl<T> From<T> for OnceOption<T> {
+    fn from(value: T) -> Self {
+        Self(Some(value))
+    }
+}
+
+impl<T> From<Option<T>> for OnceOption<T> {
+    fn from(inner: Option<T>) -> Self {
+        Self(inner)
     }
 }
 
